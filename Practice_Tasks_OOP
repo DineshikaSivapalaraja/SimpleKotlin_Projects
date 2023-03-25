@@ -108,4 +108,115 @@ fun main(args: Array<String>) {
 
     b1.tap()
 }
+//------------------------------------------------------------------------------------------------------------
+//Inheritence
 
+/*  Button as a Component
+Your Button class looks pretty good!
+However, you also need to have images on the form.
+As the images have the same width and height properties, you decide to create a base class called Component and inherit the Button and Image classes from it.
+The Button class should have its own name property and tap() function, while the Image class should have a draw() function, outputting its height and width in the format: widthheight. So for an image with width of 100 and height of 150, the output should be 100x150.
+
+Complete the given code to define the Image class and inherit the Button and Image classes from the Component class.
+Note, that width and height are Integers, so in order to concatenate them to a string you need to convert them using the toString() function: width.toString() */
+
+open class Component(var width: Int, var height: Int) {
+    
+}
+class Button(width: Int, height: Int) : Component(width, height) {
+    var name: String = "Button"
+    fun tap() {
+        println(name + " was tapped")
+    }
+}
+
+class Image(width: Int, height: Int) : Component(width, height) {
+    var name: String = "Image"
+    fun draw() {
+        println((width.toString()+"x"+height.toString()))
+    }
+}
+
+fun main(args: Array<String>) {
+    val b1 = Button(200, 50)
+    b1.tap()
+
+    val img = Image(300, 500)
+    img.draw()
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+//Visibility modifiers
+/* Restricting Access
+
+Someone modified your code to restrict public access to the width and height properties. However, there are mistakes in the code and it does not run.
+Fix the given code, so that width and height are accessible only in the derived classes, and the class functions are accessible from main.
+It is common practice to restrict access to internal properties and allow users to get/set their values using class functions or getters/setters.     */
+
+open class Component(width: Int, height: Int) {
+    protected var width = width
+    protected var height = height
+}
+class Button(width: Int, height: Int): Component(width, height) {
+    private var name: String = "Button"
+    public fun tap() {
+        println(name + " was tapped")
+    }
+}
+class Image(width: Int, height: Int): Component(width, height) {
+    public fun draw() {
+        println(width.toString()+"x"+height.toString())
+    }
+}
+fun main(args: Array<String>) {
+    val b1 = Button(200, 50)
+    b1.tap()
+
+    val img = Image(300, 500)
+    img.draw()
+}
+
+//----------------------------------------------------------------------------------------------
+//            Abstract classes
+
+/* Abstraction
+
+You decide to make the Component class abstract, since you are not going to create objects of that type.
+You also add a show() function to it that the derived classes need to override.
+For a Button, the show() function should output: "Showing a Button", while for an Image it should output: "Showing an Image".
+Implement the required show() function to generate the expected output.            */
+
+abstract class Component(width: Int, height: Int) {
+    protected var width = width
+    protected var height = height
+    abstract fun show()
+}
+class Button(width: Int, height: Int): Component(width, height) {
+
+    private var name: String = "Button"
+    fun tap() {
+        println(name + " was tapped")
+    }
+    override fun show(){
+        println("Showing a Button")
+    }
+    
+}
+class Image(width: Int, height: Int): Component(width, height) {
+    fun draw() {
+        println(width.toString()+"x"+height.toString())
+    }
+    override fun show(){
+        println("Showing an Image")
+    }
+    
+}
+fun main(args: Array<String>) {
+    val b1 = Button(200, 50)
+    b1.tap()
+    b1.show()
+
+    val img = Image(300, 500)
+    img.draw()
+    img.show()
+}
