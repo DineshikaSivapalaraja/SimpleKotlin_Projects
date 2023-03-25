@@ -43,7 +43,7 @@ The output should be a Double, even if the amount is a round number.
   
  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
   #3
-  Shipping Calculator
+Shipping calcuator
   -------------------
 
 You are working on a eCommerce website and need to make a shipping cost calculator based on the order amount.
